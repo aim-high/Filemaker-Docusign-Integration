@@ -7,8 +7,6 @@
 import requests
 
 headers = {'Authorization': 'Bearer ACCESS_TOKEN'}
-#payload = {'grant_type':'authorization_code', 'code': ''}
-
 r = requests.get('https://account.docusign.com/oauth/userinfo', headers=headers)
 
 print(r.content)
