@@ -12,6 +12,7 @@ https://developers.docusign.com/esign-rest-api
 https://community.filemaker.com/thread/97349
 
 ---- BELOW NEEDS EDITS ------
+
 Sample command to get going (replace bolded text with your Docusign Developer credentials)
 
 curl -i -H "Accept: application/json" -H 'X-DocuSign-Authentication:{"Username": "{youremail@mail.com}","Password": "{yourpassword}", "IntegratorKey": "{IntegratorKey}"}' -X GET https://demo.docusign.net/restapi/v2/accounts/{APIaccountID}
