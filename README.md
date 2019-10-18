@@ -2,12 +2,11 @@
 
 Filemaker and Docusign Integration
 
-Previous State: Aim High has staff database and uses Docusign to send HR paperwork to summer employees. During hiring season, HR department uses Docusign Retrieve to export envelope tabs and exports peron's data from Filemaker. Using VLookup, they combine both exports to submit to IRS.
+Previously: Aim High has staff database and uses Docusign's web app to send HR paperwork to summer employees. During hiring season, HR department periodically uses Docusign's Retrieve to export envelope data. Then they use Excel's VLOOKUP to combine Docusign's data and staff data from our Filemaker database. This file is then used to compile HR forms to be sent to the IRS.
 
-Goal: Share resources between Filemaker and Docusign. Namely, pull Docusign data into database such as envelope status. In the future, would like to stop using Docusign web application and instead do all things Docusign from Filemaker.
+Integration Goal: Share resources between Filemaker and Docusign. Have ability to send Docusign envelopes to staff and get Docusign's envelope data and status into the Filemaker database. 
 
-
-Sources: 
+Resources: 
 https://developers.docusign.com/esign-rest-api
 https://community.filemaker.com/thread/97349
 
@@ -17,7 +16,7 @@ Sample command to get going (replace bolded text with your Docusign Developer cr
 
 curl -i -H "Accept: application/json" -H 'X-DocuSign-Authentication:{"Username": "{youremail@mail.com}","Password": "{yourpassword}", "IntegratorKey": "{IntegratorKey}"}' -X GET https://demo.docusign.net/restapi/v2/accounts/{APIaccountID}
 
-# FileMaker Pro Advanced
+# FileMaker Pro 17 Advanced
 Download BaseElements Plugin Filemaker 17 from here: https://baseelementsplugin.zendesk.com/hc/en-us/articles/115002990887-BaseElements-Plugin and use this forum to install: https://community.filemaker.com/thread/186607
 
 Video set up help:
