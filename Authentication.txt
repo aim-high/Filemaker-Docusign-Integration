@@ -1,0 +1,6 @@
+Authentication Steps
+
+Requirements
+2 scripts (initiate.py and "".py)
+Selenium module 
+Geckodriver executable in /Applications/
