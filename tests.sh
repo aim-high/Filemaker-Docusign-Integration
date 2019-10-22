@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Purpose: 
+
+# Created by: Erica Ching (eching@aimhigh.org)
+
 NC='\033[0m'
 GREEN='\033[0;32m'
 RED='\033[0;31m'
