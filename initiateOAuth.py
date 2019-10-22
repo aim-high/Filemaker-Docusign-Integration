@@ -14,8 +14,7 @@ import json
 import os
 
 browser = webdriver.Firefox()
-browser.get('https://account.docusign.com/oauth/auth?response_type=code&scope=signature%20extended&client_id=3a1a96f5-2ef2-43b6-b756-1723fa5385ab&state=bobby%20newport&redirect_uri=https://127.0.0.1:3000')
-
+browser.get('[YOUR URL HERE]')
 print("You have 15 seconds to authenticate...")
 def countdown(t):
 	while t:
