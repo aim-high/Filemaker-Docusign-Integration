@@ -5,7 +5,7 @@
 #	window's url containing the access code. Next, initiateOAuth.py requests the OAuth 
 #	token from Docusign. If successful, Docusign returns an access token and refresh token.
 # Output: Access token to be copied and pasted in Filemaker's DocusignToken field. 
-# Created by: Erica Ching (eching@aimhigh.org)
+# Created by: Erica Ching (eching@aimhigh.org) on 10-17-2019
   
 from selenium import webdriver
 import time

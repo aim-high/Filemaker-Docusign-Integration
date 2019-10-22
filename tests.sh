@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Purpose: 
+# Purpose: Runs test to see if shell has satisfied requirements to initiateOAuth.py
 
-# Created by: Erica Ching (eching@aimhigh.org)
+# Created by: Erica Ching (eching@aimhigh.org) on 10-21=2019
 
 NC='\033[0m'
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 fail=0
 
-echo -n "Checking if initialAuth.py is in the same folder..."
-file="file.py"
+echo -n "Checking if initiateOAuth.py is in the same folder..."
+file="initiateOAuth.py"
 if [ -e $file ]; then
 	echo -e "${GREEN}passed${NC}"
 else
