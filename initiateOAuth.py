@@ -40,7 +40,7 @@ end = rlength - 22
 authcode = redirect[start:end]
 # print(redirect[start:end])
 
-headers = {'Authorization': 'Basic M2ExYTk2ZjUtMmVmMi00M2I2LWI3NTYtMTcyM2ZhNTM4NWFiOjcwZGM4NzExLTI0ZDItNDE4My1iMzA2LTM3NGM5ZWE0MTlmOA=='}
+headers = {'Authorization': 'Basic [PASTE YOURS HERE]'}
 payload = {'grant_type':'authorization_code', 'code': authcode }
 r = requests.post('https://account.docusign.com/oauth/token', data=payload, headers=headers)
 
