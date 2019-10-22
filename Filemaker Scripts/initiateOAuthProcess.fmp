@@ -1,0 +1,32 @@
+# PURPOSE: Asks user to run "initializeOAuth.py" and paste output into popup window. Fills DocusignToken field in found set.
+# PARAMETERS: None
+# DEPENDENCIES: Must have existing folder containing geckodriver executeable in $PATH.
+# Context: Found set.
+# History: Created 2019-Oct-16 by Erica Ching (eching@aimhigh.org)
+# Notes: Next feature - refresh OAuth Token every 8 hours.
+
+#----------------------------------------------------------
+
+Set Error Capture [On]
+Allow User Abort [Off]
+
+Perform Find [Restore]
+If [ Get ( FoundCount ) = 0 ]
+	Show Custom Dialog ["Find Records" ; "No records were found."]
+	Exit Script [ Text Result: "Exiting script" ]
+End If
+
+Show Custom Dialog ["In this found set..." ; "Do you want to send envelopes or get data from Docusign?" ]
+If [ Get ( LastMessageChoice ) = 1 ]
+	Show Custom Dialog [ "Docusign Authentication" ; "Please open Terminal on your computer and run \"source getDocusignToken.sh\""; DocusignToken ]
+Else If [ Get ( LastMessageChoice ) = 2 ]
+	Exit Script [ Text Result: "Exiting script" ]
+End If
+Set Variable [$token ; Value: DocusignToken ]
+
+Go to Record/Request/Page [ First ]
+Loop
+	Exit Loop If [ IsEmpty ( DocusignEnvelopeID ) ]
+	Set Field [ DocusignToken ; $token ]
+	Go to Record/Request/Page [ Next ; Exit after last: On ]
+End Loop

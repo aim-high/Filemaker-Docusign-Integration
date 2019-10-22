@@ -44,13 +44,21 @@ payload = {'grant_type':'authorization_code', 'code': authcode }
 r = requests.post('https://account.docusign.com/oauth/token', data=payload, headers=headers)
 
 #print(r.content)
-accessCode = r.content
+OAuthTokens = r.content
 
 # Parse json to get access token
-j = json.loads(accessCode)
+j = json.loads(OAuthTokens)
 
 # Prints Access Token on Terminal.
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 print("  Copy and Paste token into Filemaker:\n")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
-print (j["access_token"])
+print(j["access_token"])
+
+
+print("\n\nRefresh Token:")
+refreshToken = j["refresh_token"]
+
+headers = {'Authorization': 'Basic [BASE64_COMBINATION_OF_INTEGRATION_AND_SECRET_KEYS]}
+payload = {'grant_type':'refresh_token', 'refresh_token': refreshToken }
+r = requests.post('https://account.docusign.com/oauth/token', data=payload, headers=headers)
