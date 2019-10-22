@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Purpose: Runs test to see if shell has satisfied requirements to initiateOAuth.py
+# Purpose: Runs test to see if shell has satisfied requirements to initiateOAuth.py.
 
 # Created by: Erica Ching (eching@aimhigh.org) on 10-21=2019
 
