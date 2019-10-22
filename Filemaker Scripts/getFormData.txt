@@ -1,0 +1,105 @@
+# PURPOSE:		Get form data from Docusign Envelopes using GET request.
+# PARAMETERS:	None
+# Dependencies:	Must have valid Docusign Access Token.
+# Context: 		N/A
+# History:		Created 2019-June-03 by Erica Ching (eching@aimhigh.org)
+# Notes:		None
+
+#-------------------------------------------------------------------------------------
+
+Set Error Capture [ On ]
+Allow User Abort [ Off ]
+
+If [ IsEmpty( DocusignToken ) ]
+	Exit Script [Text Result: "Exiting script: Missing valid Authentication Token. Click \"Refresh Token\" button to initiate process of getting new token."]
+End If
+Set Variable [ $token ; Value: DocusignToken ]
+
+Set Variable [ $get_data ; Value: DocusignResult ]
+Set Variable [ $url ; Value: "{base_path}/v2.1/accounts/{accountId}/envelopes/{envelopeId}/form_data"]
+Insert from URL [ Select ; With dialog: Off ; DocusignResult ; $url ; cURL options: "-X GET" & " -H \"Authorization: Bearer " & $token & "\" -H \"Content-Type: application/json\"" & "-d @$get_data" ]
+
+Set Field [ DocusignEnvelopeStatus ; JSONGetElement (DocusignResult ; "status ") ]
+
+If [ PositionType = "Lead Teacher" or PositionType = "Assistant Teacher" or ...]
+	Set Field [ DocusignFullName ; JSONSetElement ( $$JSON ; 
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[0]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[0]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[1]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[1]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[2]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[2]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[3]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[3]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[4]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[4]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[5]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[5]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[6]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[6]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[7]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[7]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[8]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[8]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[9]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[9]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[10]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[10]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[11]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[11]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[12]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[12]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[13]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[13]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[14]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[14]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[15]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[15]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[16]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[16]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[17]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[17]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[18]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[18]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[19]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[19]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[20]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[20]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[21]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[21]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[22]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[22]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[23]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[23]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[24]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[24]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[25]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[25]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[26]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[26]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[27]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[27]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[28]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[28]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[29]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[29]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[30]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[30]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[31]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[31]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[32]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[32]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[33]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[33]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[34]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[34]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[35]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[35]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[36]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[36]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[37]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[37]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[38]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[38]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[39]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[39]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[40]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[40]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[41]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[41]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[42]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[42]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[43]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[43]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[44]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[44]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[45]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[45]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[46]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[46]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[47]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[47]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[48]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[48]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[49]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[49]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[50]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[50]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[51]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[51]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[52]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[52]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[53]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[53]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[54]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[54]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[55]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[55]value" ) ; 1 ];
+[ JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[55]name") ; JSONGetElement ( PER_SFA__StaffApplication::DocusignResult ; "formData[55]value" ) ; 1 ]
+
+)
+Else If [PositionType = "Volunteer"]
+	...
+Else If [PositionType = "College Intern" or "High School Intern"]
+	...
+Else If [PositionType = "Site Director"]
+	...
+End If
+
+Set Field [DocusignResult ; DocusignFullName]
+Set Field [DocusignFullName ; JSONGetElement (DocusignResult ; "Full Name")]
+Set Field [DocusignDiffNameFlag ; JSONGetElement (DocusignResult ; "Name differs")]
+...
+...
+...
+If [ DocusignEnvelopeStatus = "completed" ]
+	Set Field [DocusignCompletedFlag ; 1 ]
+End If
+
+Set Field [ DocusignResult ; ""]
+
+Exit Script [Text Result: $null] 
