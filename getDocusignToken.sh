@@ -62,7 +62,7 @@ else
 fi
 
 if [[ $fail -gt 0 ]]; then
-	echo -e "${RED}Did not pass all tests...exiting script${NC}"
+	echo -e "${RED}Did not pass all tests. Please visit 'https://github.com/aim-high/Filemaker-Docusign-Integration' for set up instructions...exiting script${NC}"
 	exit 1
 fi
 
