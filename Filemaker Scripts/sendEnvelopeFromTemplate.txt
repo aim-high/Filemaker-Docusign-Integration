@@ -1,0 +1,23 @@
+# PURPOSE:		Sends Docusign envelope using Docusign Template.
+# PARAMETERS:	None
+# Dependencies:	Must have valid Docusign Access Token and TemplateID.
+# Context: 		N/A
+# History:		Created 2019-October-10 by Erica Ching (eching@aimhigh.org)
+# Notes:		None
+
+#-------------------------------------------------------------------------------------
+
+Set Error Capture [On]
+Allow User Abort [Off]
+
+Set Variable [$token ; Value: DocusignToken ]
+Set Variable [$accountID ; Value: {YOUR_ACCOUNTID}]
+
+If [IsEmpty (PositionType) or IsEmpty (SiteAssigned::Name) or IsEmpty (SalaryCurrent) or CheckOutStatus not "Hired"]
+	Exit Script [ Text Result: "Failed Send: Missing at least one of these fields: PositionType, SiteAssigned, SalaryCurrent, or not valid CheckOutStatus"]
+End If
+
+Set Variable [$email ; Value: Email1]
+Set Variable [$name ; Value: NameFirstLast_c]
+Set Variable [$PositionType ; Value: PositionType]
+Set Variable [$templateId ; Value: {TEMPLATEID_HERE}]	
