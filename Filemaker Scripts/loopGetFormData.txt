@@ -1,0 +1,15 @@
+# PURPOSE:		From found set, loop through records and run GetFormData for each record.
+# PARAMETERS:	None
+# Dependencies:	Must have valid envelopeID and Docusign Access Token.
+# Context: 		N/A
+# History:		Created 2019-June-03 by Erica Ching (eching@aimhigh.org)
+# Notes:		None
+
+#-------------------------------------------------------------------------------------
+
+Go to Record/Request/Page [First]
+Loop
+	Exit Loop If [ IsEmpty (DocusignEnvelopeID) or IsEmpty (DocusignToken)]
+	Perform Script [ Specified: From list ; "GetFormData" ; Parameter: ]
+	Go to Record/Request/Page [ Next ; Exit after last: On]
+Exit Loop
