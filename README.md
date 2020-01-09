@@ -4,7 +4,7 @@
 
 **Previously:** Aim High has staff database and uses Docusign's web app to send HR paperwork to summer employees. During hiring season, HR department periodically uses Docusign's Retrieve to export envelope data. Then they use Excel's VLOOKUP to combine Docusign's data and staff data from our Filemaker database. This file is then used to compile HR forms to be sent to the IRS.
 
-**Integration Goal:** Share resources between Filemaker and Docusign. Have ability to send Docusign envelopes to staff and get Docusign's envelope data and status into the Filemaker database. *Polling API* 
+**Integration Goal:** Share resources between Filemaker and Docusign. Have ability to send Docusign envelopes to staff and get Docusign's envelope data and status into the Filemaker database. 
 
 ## Requirements
 	* Filemaker Pro Advanced 17
@@ -17,7 +17,7 @@
 Whoever is following this has a basic understanding of HTTP requests and familiarity with Docusign's REST API (or able to understand documentation). You are somewhat comfortable using Python, bash scripting, and Filemaker scripting, 
 
 ## Current Integration Solution:
-	* eSignature API v2.1
+	* eSignature API v2.1 (Polling API)
 	  * Authorization Code Grant
 	
 ## Filemaker
