@@ -26,6 +26,12 @@ Whoever is following this has a basic understanding of HTTP requests and familia
 
 
 # Authentication
+Authorization Code Grant
+Examine getDocusignToken.sh and initiateOAuth.py. Fill in your credentials where indicated and run on the command line ```source getDocusignToken.sh```.
+
+Enter your Docusign credentials in the opened Firefox browser. If successful, initiateOAuth.py will read the returned authcode and will use it to request both a refresh and access token.
+initiateOAuth.py prints refresh and access tokens on terminal.
+
 
 Familiarize yourself with [cron](https://crontab.guru/) to get access token using valid refresh token.
 To edit your crontab: on your command line for Mac OS X type 
