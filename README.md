@@ -40,6 +40,10 @@ It might look like this:
 The first line tells cron to run refresh.py Monday thru Friday at 9am. Recall that refresh.py updates access_token.txt with a valid access token and timestamp when run.
 The second line tells cron to overwrite access_token.txt with an expiration message. Tokens expire every 8 hours so cron runs this job at 5pm Monday thru Friday.
 
+Docusign's refresh token expires every 30 days. Set a monthly reminder via cron to stay on top of things!
+```
+0	9	1	*	*	echo "Please get new refresh token." >> /Users/erica/Desktop/access_token.txt
+```
 
 ## Resources
 [Docusign REST API Documentation](https://developers.docusign.com/esign-rest-api)
