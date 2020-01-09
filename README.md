@@ -21,13 +21,22 @@ Whoever is following this has a basic understanding of HTTP requests and familia
 	  * Authorization Code Grant
 	
 ## Filemaker
--Create a dedicated set of fields for Docusign-related data. These fields may nclude envelope tab data (status, envelopeID, etc.).
+-Create a dedicated set of fields for Docusign-related data. These fields may include envelope tab data (status, envelopeID, etc.).
 -Created a layout where users initiate actions by clicking a button. I created 3 buttons: sending Docusign envelopes, getting tab data from envelopes, and getting an OAuth token.
 
 
 # Authentication
 ```
+Familiarize yourself with [cron](https://crontab.guru/) to get access token using valid refresh token.
+To edit your crontab: on your command line for Mac OS X type '''crontab -e'''
+If you need more help type "man crontab"
 
+It might look like this:
+0    9    *    *    1-5     cd [absolute path for directory that houses refresh.py] && python3 refresh.py >> ~/cron.log 2>&1
+0   16    *    *    1-5     echo "Access token has expired. Run refresh.py manually to update or wait till 9am M-F" > /Users/erica/repos/private/access_token.txt
+
+The first line tells cron to run refresh.py Monday thru Friday at 9am. Recall that refresh.py updates access_token.txt with a valid access token and timestamp when run.
+The second line tells cron to overwrite access_token.txt with an expiration message. Tokens expire every 8 hours so cron runs this job at 5pm Monday thru Friday.
 
 ```
 
