@@ -26,15 +26,17 @@ Whoever is following this has a basic understanding of HTTP requests and familia
 
 
 # Authentication
-```
+
 Familiarize yourself with [cron](https://crontab.guru/) to get access token using valid refresh token.
-To edit your crontab: on your command line for Mac OS X type '''crontab -e'''
-If you need more help type "man crontab"
+To edit your crontab: on your command line for Mac OS X type 
+```crontab -e```
+If you need more help type ```man crontab```
 
 It might look like this:
+```
 0    9    *    *    1-5     cd [absolute path for directory that houses refresh.py] && python3 refresh.py >> ~/cron.log 2>&1
 0   16    *    *    1-5     echo "Access token has expired. Run refresh.py manually to update or wait till 9am M-F" > /Users/erica/repos/private/access_token.txt
-
+```
 The first line tells cron to run refresh.py Monday thru Friday at 9am. Recall that refresh.py updates access_token.txt with a valid access token and timestamp when run.
 The second line tells cron to overwrite access_token.txt with an expiration message. Tokens expire every 8 hours so cron runs this job at 5pm Monday thru Friday.
 
@@ -43,7 +45,7 @@ The second line tells cron to overwrite access_token.txt with an expiration mess
 
 
 ## Resources: 
-[Docusign REST API Documentation](https://developers.docusign.com/esign-rest-api)
+[Docusign REST API Documentation](https://developers.docusign.com/esign-rest-api)```
 Download BaseElements Plugin Filemaker 17 from [here](https://baseelementsplugin.zendesk.com/hc/en-us/articles/115002990887-BaseElements-Plugin and use this forum to install: https://community.filemaker.com/thread/186607)
 
 [Video](https://community.filemaker.com/external-link.jspa?url=https%3A%2F%2Fwww.filemakermagazine.com%2Fvideos%2Ffilemaker-rest-using-baseelements-plugin) set up
