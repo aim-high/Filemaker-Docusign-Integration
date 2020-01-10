@@ -8,19 +8,18 @@
 
 ## Requirements
 	* Filemaker Pro Advanced 17
-	  * BaseElements Plugin for Filemaker 17
 	* python3
 	* selenium, requests modules
 	* geckodriver exec
 
 ## Assumptions:
-Whoever is following this has a basic understanding of HTTP requests and familiarity with Docusign's REST API (or able to understand documentation). You are somewhat comfortable using Python, bash scripting, and Filemaker scripting, 
+Whoever is following this has a basic understanding of HTTP requests and familiarity with Docusign's REST API. You are somewhat comfortable using Python, bash scripting, and Filemaker scripting. 
 
 ## Current Integration Solution:
 	* eSignature API v2.1 (Polling API)
 	  * Authorization Code Grant
 	
-## Filemaker
+### Filemaker
 * Create a dedicated set of fields for Docusign-related data. These fields may include envelope tab data (status, envelopeID, etc.).
 * Created a layout where users initiate actions by clicking a button. I created 3 buttons: sending Docusign envelopes, getting tab data from envelopes, and getting an OAuth token.
 
@@ -50,6 +49,39 @@ Docusign's refresh token expires every 30 days. Set a monthly reminder via cron 
 ```
 0	9	1	*	*	echo "Please get new refresh token." >> /Users/erica/Desktop/access_token.txt
 ```
+
+## Sending Docusign inside Filemaker
+[under construction]
+
+## Polling Docusign tabs into Filemaker fields
+Implemented in Filemaker\ Scripts > getFormData.txt using Docusign eSignature REST API [EnvelopeFormData: GET](https://developers.docusign.com/esign-rest-api/reference/Envelopes/EnvelopeFormData/get).
+My HTTP GET request in Filemaker looks like this:
+```
+Set Variable [ $get_data ; Value: DocusignResult]
+Set Variable [ $url ; Value: "https://demo.docusign.net/restapi/v2.1/accounts/[ACCOUNT_ID]/envelopes/[ENVELOPE_ID]/form_data"]
+Insert from URL [ Select ; With dialog: Off ; DocusignResult ; $url ; cURL options: "-X GET -H \"Authorization: Bearer [TOKEN] -H \"Content-Type: application/json\"" & "-d @$get_data"]
+```
+
+Since templates are separated out by staff's PositionType, create JSON object using Filemaker's built in JSONSetElement.
+Filemaker's JSONSetElement
+```
+JSONSetElement ( json ; keyOrIndexOrPath ; value ; type )
+```
+Sample filled with Docusign's formData:
+```
+JSONSetElement ( $$JSON ; 
+[ JSONGetElement ( DocusignResult ; "formData[0]name") ; JSONGetElement ( DocusignResult ; "formData[0]value" ) ; 1 ];
+[ JSONGetElement ( DocusignResult ; "formData[1]name") ; JSONGetElement ( DocusignResult ; "formData[1]value" ) ; 1 ];
+[ JSONGetElement ( DocusignResult ; "formData[2]name") ; JSONGetElement ( DocusignResult ; "formData[2]value" ) ; 1 ];
+[ JSONGetElement ( DocusignResult ; "formData[3]name") ; JSONGetElement ( DocusignResult ; "formData[3]value" ) ; 1 ]
+)
+```
+The above code shows the first 4 name-value pairs being grouped into a JSON object.
+With the created JSON object, you can parse the returned JSON with the Docusign tab's name (as opposed to its position).
+```
+Set Field [ DocusignSN ; JSONGetElement (DocusignResult ; "SSN")]
+```
+The above example would set your DocusignSN Filemaker field to the value of Docusign's SSN tab.
 
 ## Resources
 [Docusign REST API Documentation](https://developers.docusign.com/esign-rest-api)
