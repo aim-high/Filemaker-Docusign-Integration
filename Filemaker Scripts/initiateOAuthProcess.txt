@@ -1,4 +1,4 @@
-# PURPOSE: Asks user to run "initializeOAuth.py" and paste output into popup window. Fills DocusignToken field in found set.
+# PURPOSE: Asks user to run "getDocusignToken.sh" and paste output into popup window. Fills DocusignToken field in found set.
 # PARAMETERS: None
 # DEPENDENCIES: Must have existing folder containing geckodriver executeable in $PATH.
 # Context: Found set.
@@ -10,6 +10,7 @@
 Set Error Capture [On]
 Allow User Abort [Off]
 
+# Find records matching: Year = 2020, CheckoutStatus = Hired
 Perform Find [Restore]
 If [ Get ( FoundCount ) = 0 ]
 	Show Custom Dialog ["Find Records" ; "No records were found."]
@@ -18,7 +19,7 @@ End If
 
 Show Custom Dialog ["In this found set..." ; "Do you want to send envelopes or get data from Docusign?" ]
 If [ Get ( LastMessageChoice ) = 1 ]
-	Show Custom Dialog [ "Docusign Authentication" ; "Please open Terminal on your computer and run \"source getDocusignToken.sh\""; DocusignToken ]
+	Show Custom Dialog [ "Docusign Authentication" ; "Please open Terminal on your computer and run \"source getDocusignToken.sh\" If you are missing that file, contact Erica (eching@aimhigh.org)"; DocusignToken ]
 Else If [ Get ( LastMessageChoice ) = 2 ]
 	Exit Script [ Text Result: "Exiting script" ]
 End If

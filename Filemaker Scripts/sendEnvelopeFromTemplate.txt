@@ -45,6 +45,7 @@ Else If [$position = " Volunteer" ]
 	Set Variable [$templateID ; Value: {TEMPLATEID_VOLUNTEER}]
 End If
 
+# Create JSON object to populate Docusign tabs with Filemaker fields
 Set Variable [$post_data ; Value: JSONSetElement ($$json ; 
 ["accountId" ; $accountID ; JSONString ];
 ["emailSubject" ; "Aim High Compliance Documents"; JSONString]; 
