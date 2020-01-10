@@ -6,16 +6,16 @@
 
 **Integration Goal:** Share resources between Filemaker and Docusign. Have ability to send Docusign envelopes to staff and get Docusign's envelope data and status into the Filemaker database. 
 
-## Requirements
+### Requirements
 	* Filemaker Pro Advanced 17
 	* python3
 	* selenium, requests modules
 	* geckodriver exec
 
-## Assumptions:
+### Assumptions:
 Whoever is following this has a basic understanding of HTTP requests and familiarity with Docusign's REST API. You are somewhat comfortable using Python, bash scripting, and Filemaker scripting. 
 
-## Current Integration Solution:
+### Current Integration Solution:
 	* eSignature API v2.1 (Polling API)
 	  * Authorization Code Grant
 	
@@ -23,13 +23,15 @@ Whoever is following this has a basic understanding of HTTP requests and familia
 * Create a dedicated set of fields for Docusign-related data. These fields may include envelope tab data (status, envelopeID, etc.).
 * Created a layout where users initiate actions by clicking a button. I created 3 buttons: sending Docusign envelopes, getting tab data from envelopes, and getting an OAuth token.
 
-
-# Authentication
-Authorization Code Grant
+### Authentication for Authorization Code Grant
+Demo (sandbox endpoints) https://demo.docusign.net/...
+Live (production endpoint) https://{server}.docusign.net/...
 Examine getDocusignToken.sh and initiateOAuth.py. Fill in your credentials where indicated and run on the command line ```source getDocusignToken.sh```.
 
 Enter your Docusign credentials in the opened Firefox browser. If successful, initiateOAuth.py will read the returned authcode and will use it to request both a refresh and access token.
 initiateOAuth.py prints refresh and access tokens on terminal.
+
+Tip: While you're using your demo sandbox environment, you can use [Docusign's OAuth Token Generator](https://developers.docusign.com/oauth-token-generator) to get the main components running.
 
 
 Familiarize yourself with [cron](https://crontab.guru/) to get access token using valid refresh token.
@@ -50,10 +52,41 @@ Docusign's refresh token expires every 30 days. Set a monthly reminder via cron 
 0	9	1	*	*	echo "Please get new refresh token." >> /Users/erica/Desktop/access_token.txt
 ```
 
-## Sending Docusign inside Filemaker
+### Sending Docusign envelopes via Filemaker
 [under construction]
+[Learn more about REST API Templates](https://developers.docusign.com/esign-rest-api/guides/features/templates)
+[Learn more about sending an envelope via your app](https://developers.docusign.com/esign-rest-api/code-examples/code-example-embedded-sending)
+See sendEnvelopeFromTemplate.txt in Filemaker Scripts folder for my implementation.
+```
+# Create JSON object to populate Docusign tabs with Filemaker fields
+Set Variable [$post_data ; Value: JSONSetElement ($$json ; 
+["accountId" ; $accountID ; JSONString ];
+["emailSubject" ; "Aim High Compliance Documents"; JSONString]; 
+["templateId" ; $templateId ; JSONString];
+["templateRoles[0]email"; $email ; JSONString];
+["templateRoles[0]name"; $name ; JSONString];
+["templateRoles[0]roleName"; "Staff" ; JSONString];
+["templateRoles[0]tabs.textTabs[0]tabLabel"; "status_I9" ; JSONString];
+["templateRoles[0]tabs.textTabs[0]value"; $status_I9 ; JSONString];
+["templateRoles[0]tabs.textTabs[1]tabLabel"; "status_LiveScan" ; JSONString];
+["templateRoles[0]tabs.textTabs[1]value"; $status_LiveScan ; JSONString];
+...
+["status"; "sent" ; JSONString])
+```
+HTTP POST request
+```
+Set Variable [$url ; Value: {YOUR_DOCUSIGN_ENDPOINT}/v2.1/accounts/{ACCOUNTID}/envelopes ]
+Insert from URL [ Select ; With dialog: Off ; DocusignResult; $url; cURL options: "-X POST -H \"Authorization: Bearer " & $token & "\" -H \"Content-Type: application/json\"" & "-d @$post_data" ]
+```
 
-## Polling Docusign tabs into Filemaker fields
+Don't forget to save your envelopeID and status!
+```
+# Set envelopeID and envelopeStatus fields
+Set Field [ DocusignEnvelopeID ; JSONGetElement (DocusignResult ; "envelopeId")]
+Set Field [ DocusignEnvelopeStatus ; JSONGetElement (DocusignResult ; "status")]
+```
+
+### Polling Docusign tabs into Filemaker fields
 Implemented in Filemaker\ Scripts > getFormData.txt using Docusign eSignature REST API [EnvelopeFormData: GET](https://developers.docusign.com/esign-rest-api/reference/Envelopes/EnvelopeFormData/get).
 My HTTP GET request in Filemaker looks like this:
 ```
@@ -85,6 +118,7 @@ The above example would set your DocusignSN Filemaker field to the value of Docu
 
 ## Resources
 [Docusign REST API Documentation](https://developers.docusign.com/esign-rest-api)
+[Filemaker Pro 17 Advanced Documentation](https://fmhelp.filemaker.com/help/17/fmp/en/#page/FMP_Help%2Findex.html)
 
 ## Other ways to Implement 
 [Download BaseElements Plugin Filemaker 17](https://baseelementsplugin.zendesk.com/hc/en-us/articles/115002990887-BaseElements-Plugin) and [use this forum to install](https://community.filemaker.com/thread/186607)
