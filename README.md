@@ -13,7 +13,7 @@
 	* geckodriver exec
 
 ### Assumptions:
-Whoever is following this has a basic understanding of HTTP requests and familiarity with Docusign's REST API. You are somewhat comfortable using Python, bash scripting, and Filemaker scripting. 
+Whoever is following this has a basic understanding of HTTP requests and familiarity with Docusign's REST API. You are somewhat comfortable using or learning Python, bash scripting, and Filemaker scripting. 
 
 ### Current Integration Solution:
 	* eSignature API v2.1 (Polling API)
@@ -24,8 +24,8 @@ Whoever is following this has a basic understanding of HTTP requests and familia
 * Created a layout where users initiate actions by clicking a button. I created 3 buttons: sending Docusign envelopes, getting tab data from envelopes, and getting an OAuth token.
 
 ### Authentication for Authorization Code Grant
-Demo (sandbox endpoints) https://demo.docusign.net/...
-Live (production endpoint) https://{server}.docusign.net/...
+Demo (sandbox endpoints) - https://demo.docusign.net/...
+Live (production endpoint) - https://{server}.docusign.net/...
 Examine getDocusignToken.sh and initiateOAuth.py. Fill in your credentials where indicated and run on the command line ```source getDocusignToken.sh```.
 
 Enter your Docusign credentials in the opened Firefox browser. If successful, initiateOAuth.py will read the returned authcode and will use it to request both a refresh and access token.
@@ -119,6 +119,9 @@ The above example would set your DocusignSN Filemaker field to the value of Docu
 ## Resources
 [Docusign REST API Documentation](https://developers.docusign.com/esign-rest-api)
 [Filemaker Pro 17 Advanced Documentation](https://fmhelp.filemaker.com/help/17/fmp/en/#page/FMP_Help%2Findex.html)
+[Stackoverflow](https://stackoverflow.com/questions/tagged/docusignapi)
+[REST API: SDKs](https://developers.docusign.com/esign-rest-api/sdk-tools)
+[OAuth Token Generator for Sandbox](https://developers.docusign.com/oauth-token-generator)
 
 ## Other ways to Implement 
 [Download BaseElements Plugin Filemaker 17](https://baseelementsplugin.zendesk.com/hc/en-us/articles/115002990887-BaseElements-Plugin) and [use this forum to install](https://community.filemaker.com/thread/186607)
