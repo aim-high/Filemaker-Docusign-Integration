@@ -118,9 +118,13 @@ The above example would set your DocusignSN Filemaker field to the value of Docu
 
 ## Resources
 [Docusign REST API Documentation](https://developers.docusign.com/esign-rest-api)
+
 [Filemaker Pro 17 Advanced Documentation](https://fmhelp.filemaker.com/help/17/fmp/en/#page/FMP_Help%2Findex.html)
+
 [Stackoverflow](https://stackoverflow.com/questions/tagged/docusignapi)
+
 [REST API: SDKs](https://developers.docusign.com/esign-rest-api/sdk-tools)
+
 [OAuth Token Generator for Sandbox](https://developers.docusign.com/oauth-token-generator)
 
 ## Other ways to Implement 
