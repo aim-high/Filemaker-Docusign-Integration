@@ -2,7 +2,7 @@
 
 # Purpose: Runs test to see if shell has satisfied requirements to initiateOAuth.py.
 
-# Created by: Erica Ching (eching@aimhigh.org) on 10-21=2019
+# Created by: Erica Ching (eching@aimhigh.org) on 10-21-2019
 
 NC='\033[0m'
 GREEN='\033[0;32m'

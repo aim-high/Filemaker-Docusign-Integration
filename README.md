@@ -41,15 +41,15 @@ If you need more help type ```man crontab```
 
 It might look like this:
 ```
-0    9    *    *    1-5     cd [absolute path for directory that houses refresh.py] && python3 refresh.py >> ~/cron.log 2>&1
-0   16    *    *    1-5     echo "Access token has expired. Run refresh.py manually to update or wait till 9am M-F" > /Users/erica/Desktop/access_token.txt
+0    9    *    *    1-5     cd {absolute path for directory that houses refresh.py} && python3 refresh.py >> ~/cron.log 2>&1
+0   16    *    *    1-5     echo "Access token has expired. Run refresh.py manually to update or wait till 9am M-F" > {absolute path to access_token.txt}
 ```
 The first line tells cron to run refresh.py Monday thru Friday at 9am. Recall that refresh.py updates access_token.txt with a valid access token and timestamp when run.
 The second line tells cron to overwrite access_token.txt with an expiration message. Tokens expire every 8 hours so cron runs this job at 5pm Monday thru Friday.
 
 Docusign's refresh token expires every 30 days. Set a monthly reminder via cron to stay on top of things!
 ```
-0	9	1	*	*	echo "Please get new refresh token." >> /Users/erica/Desktop/access_token.txt
+0	9	1	*	*	echo "Please get new refresh token." >> {absolute path to access_token.txt}
 ```
 
 ### Sending Docusign envelopes via Filemaker
@@ -100,7 +100,7 @@ Since templates are separated out by staff's PositionType, create JSON object us
 ```
 JSONSetElement ( json ; keyOrIndexOrPath ; value ; type )
 ```
-Sample filled with Docusign's formData:
+Sample JSONSetElement filled with Docusign's formData:
 ```
 JSONSetElement ( $$JSON ; 
 [ JSONGetElement ( DocusignResult ; "formData[0]name") ; JSONGetElement ( DocusignResult ; "formData[0]value" ) ; 1 ];
@@ -117,7 +117,7 @@ Set Field [ DocusignSN ; JSONGetElement (DocusignResult ; "SSN")]
 The above example would set your DocusignSN Filemaker field to the value of Docusign's SSN tab.
 
 ###### Template changes
-If there's any addition/subtraction of tabs in your template envelope, you must adjust your created JSON Object (shown above) accordingly.
+If there's any addition/subtraction of tabs in your template envelope, you **must** adjust the JSONSetElement statement to create your JSON Object accordingly.
 * Troubleshooting: Every tab name label must not be empty! Otherwise your JSON object will not be created.
 
 
