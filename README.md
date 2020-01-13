@@ -6,26 +6,26 @@
 
 **Integration Goal:** Share resources between Filemaker and Docusign. Have ability to send Docusign envelopes to staff and get Docusign's envelope data and status into the Filemaker database. 
 
+### Current Integration Solution
+**eSignature API v2.1 ([Polling API](https://developers.docusign.com/esign-rest-api/code-examples/polling-for-envelope-status))**
+* Authorization Code Grant
+
 ### Requirements
 	* Filemaker Pro Advanced 17
-	* python3
-	* selenium, requests modules
-	* geckodriver exec
+	* [python3](https://www.python.org/downloads/)
+	* [selenium](https://pypi.org/project/selenium/), [requests](https://pypi.org/project/requests/) modules
+	* [Mozilla's geckodriver](https://github.com/mozilla/geckodriver)
 
 ### Assumptions:
 Whoever is following this has a basic understanding of HTTP requests and familiarity with Docusign's REST API. You are somewhat comfortable using or learning Python, bash scripting, and Filemaker scripting. 
-
-### Current Integration Solution:
-	* eSignature API v2.1 (Polling API)
-	  * Authorization Code Grant
 	
 ### Filemaker
 * Create a dedicated set of fields for Docusign-related data. These fields may include envelope tab data (status, envelopeID, etc.).
 * Created a layout where users initiate actions by clicking a button. I created 3 buttons: sending Docusign envelopes, getting tab data from envelopes, and getting an OAuth token.
 
 ### Authentication for Authorization Code Grant
-Demo (sandbox endpoints) - https://demo.docusign.net/...
-Live (production endpoint) - https://{server}.docusign.net/...
+Demo (sandbox endpoints) - 'https://demo.docusign.net/...'
+Live (production endpoint) - 'https://{server}.docusign.net/...'
 Examine getDocusignToken.sh and initiateOAuth.py. Fill in your credentials where indicated and run on the command line ```source getDocusignToken.sh```.
 
 Enter your Docusign credentials in the opened Firefox browser. If successful, initiateOAuth.py will read the returned authcode and will use it to request both a refresh and access token.
@@ -121,7 +121,7 @@ If there's any addition/subtraction of tabs in your template envelope, you **mus
 * Troubleshooting: Every tab name label must not be empty! Otherwise your JSON object will not be created.
 
 
-## Resources
+#### Resources
 [Docusign REST API Documentation](https://developers.docusign.com/esign-rest-api)
 
 [Filemaker Pro 17 Advanced Documentation](https://fmhelp.filemaker.com/help/17/fmp/en/#page/FMP_Help%2Findex.html)
@@ -132,7 +132,7 @@ If there's any addition/subtraction of tabs in your template envelope, you **mus
 
 [OAuth Token Generator for Sandbox](https://developers.docusign.com/oauth-token-generator)
 
-## Other ways to Implement 
+#### Other ways to Implement 
 [Download BaseElements Plugin Filemaker 17](https://baseelementsplugin.zendesk.com/hc/en-us/articles/115002990887-BaseElements-Plugin) and [use this forum to install](https://community.filemaker.com/thread/186607)
 
 [BaseElements Plugin Set up Video](https://community.filemaker.com/external-link.jspa?url=https%3A%2F%2Fwww.filemakermagazine.com%2Fvideos%2Ffilemaker-rest-using-baseelements-plugin)
