@@ -96,7 +96,7 @@ Insert from URL [ Select ; With dialog: Off ; DocusignResult ; $url ; cURL optio
 ```
 
 Since templates are separated out by staff's PositionType, create JSON object using Filemaker's built in JSONSetElement.
-Filemaker's JSONSetElement
+[Filemaker's JSONSetElement](https://fmhelp.filemaker.com/help/17/fmp/en/index.html#page/FMP_Help%2Fjsonsetelement.html%23)
 ```
 JSONSetElement ( json ; keyOrIndexOrPath ; value ; type )
 ```
@@ -115,6 +115,11 @@ With the created JSON object, you can parse the returned JSON with the Docusign 
 Set Field [ DocusignSN ; JSONGetElement (DocusignResult ; "SSN")]
 ```
 The above example would set your DocusignSN Filemaker field to the value of Docusign's SSN tab.
+
+###### Template changes
+If there's any addition/subtraction of tabs in your template envelope, you must adjust your created JSON Object (shown above) accordingly.
+* Troubleshooting: Every tab name label must not be empty! Otherwise your JSON object will not be created.
+
 
 ## Resources
 [Docusign REST API Documentation](https://developers.docusign.com/esign-rest-api)
