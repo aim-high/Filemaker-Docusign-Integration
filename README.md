@@ -11,21 +11,21 @@
 * Authorization Code Grant
 
 ### Requirements
-	* Filemaker Pro Advanced 17
-	* [python3](https://www.python.org/downloads/)
-	* [selenium](https://pypi.org/project/selenium/), [requests](https://pypi.org/project/requests/) modules
-	* [Mozilla's geckodriver](https://github.com/mozilla/geckodriver)
+* Filemaker Pro Advanced 17
+* [python3](https://www.python.org/downloads/)
+* [selenium](https://pypi.org/project/selenium/), [requests](https://pypi.org/project/requests/) modules
+* [Mozilla's geckodriver](https://github.com/mozilla/geckodriver)
 
 ### Assumptions:
-Whoever is following this has a basic understanding of HTTP requests and familiarity with Docusign's REST API. You are somewhat comfortable using or learning Python, bash scripting, and Filemaker scripting. 
+You have a basic understanding of HTTP requests and familiarity with Docusign's REST API. You are somewhat comfortable using or learning Python, bash scripting, and Filemaker scripting. 
 	
 ### Filemaker
 * Create a dedicated set of fields for Docusign-related data. These fields may include envelope tab data (status, envelopeID, etc.).
 * Created a layout where users initiate actions by clicking a button. I created 3 buttons: sending Docusign envelopes, getting tab data from envelopes, and getting an OAuth token.
 
 ### Authentication for Authorization Code Grant
-Demo (sandbox endpoints) - 'https://demo.docusign.net/...'
-Live (production endpoint) - 'https://{server}.docusign.net/...'
+Demo (sandbox endpoints) - ```https://demo.docusign.net/...```
+Live (production endpoint) - ```https://{server}.docusign.net/...```
 Examine getDocusignToken.sh and initiateOAuth.py. Fill in your credentials where indicated and run on the command line ```source getDocusignToken.sh```.
 
 Enter your Docusign credentials in the opened Firefox browser. If successful, initiateOAuth.py will read the returned authcode and will use it to request both a refresh and access token.
@@ -137,3 +137,13 @@ If there's any addition/subtraction of tabs in your template envelope, you **mus
 
 [BaseElements Plugin Set up Video](https://community.filemaker.com/external-link.jspa?url=https%3A%2F%2Fwww.filemakermagazine.com%2Fvideos%2Ffilemaker-rest-using-baseelements-plugin)
 
+Sample command to get going (replace with your Docusign Developer credentials)
+
+curl -i -H "Accept: application/json" -H 'X-DocuSign-Authentication:{"Username": "{youremail@mail.com}","Password": "{yourpassword}", "IntegratorKey": "{IntegratorKey}"}' -X GET https://demo.docusign.net/restapi/v2/accounts/{ACCOUNTID}
+
+Create custom functions in Filemaker Pro Advanced:
+File > Manage > Custom Functions
+
+endPointTest () = "https://demo.docusign.net/restapi/v2/accounts/{AccountID}"
+DocusignKeyTest() = "{\"Username\": \"{youremail@mail.com}\",\"Password\": \"{yourpassword}\", \"IntegratorKey\": \"{integratorkey}\"}"
+listStatus() = "https://demo.docusign.net/restapi/v2/accounts/{AccountID}/envelopes/status"
