@@ -1,0 +1,5 @@
+# Sample output file from refresh.py.
+
+{REFRESH_TOKEN}
+
+Script run at 2020-01-09 09:00:01.590115.
