@@ -6,7 +6,7 @@
 
 import requests
 
-headers = {'Authorization': 'Bearer ACCESS_TOKEN'}
-r = requests.get('https://account.docusign.com/oauth/userinfo', headers=headers)
+headers = {'Authorization': 'Bearer {ACCESS_TOKEN}'}
+r = requests.get('{ENDPOINT}/oauth/userinfo', headers=headers)
 
 print(r.content)

@@ -57,45 +57,9 @@ Set Variable [$post_data ; Value: JSONSetElement ($$json ;
 ["templateRoles[0]tabs.textTabs[0]value"; $status_I9 ; JSONString];
 ["templateRoles[0]tabs.textTabs[1]tabLabel"; "status_LiveScan" ; JSONString];
 ["templateRoles[0]tabs.textTabs[1]value"; $status_LiveScan ; JSONString];
-["templateRoles[0]tabs.textTabs[2]tabLabel"; "TBTestDate" ; JSONString];
-["templateRoles[0]tabs.textTabs[2]value"; $TBTestDate ; JSONString];
-["templateRoles[0]tabs.textTabs[3]tabLabel"; "YearOfLiveScan" ; JSONString];
-["templateRoles[0]tabs.textTabs[3]value"; $YearOfLiveScan ; JSONString];
-["templateRoles[0]tabs.textTabs[4]tabLabel"; "I9OnFile" ; JSONString];
-["templateRoles[0]tabs.textTabs[4]value"; $I9OnFile ; JSONString];
-["templateRoles[0]tabs.textTabs[5]tabLabel"; "status_TBTest" ; JSONString];
-["templateRoles[0]tabs.textTabs[5]value"; $status_TBTest ; JSONString];
-["templateRoles[0]tabs.textTabs[6]tabLabel"; "PositionType" ; JSONString];
-["templateRoles[0]tabs.textTabs[6]value"; $PositionType ; JSONString];
-["templateRoles[0]tabs.textTabs[7]tabLabel"; "SFA_STY_SIT__SiteAssigned_Name" ; JSONString];
-["templateRoles[0]tabs.textTabs[7]value"; $site ; JSONString];
-["templateRoles[0]tabs.textTabs[8]tabLabel"; "ID_Person_Staff" ; JSONString];
-["templateRoles[0]tabs.textTabs[8]value"; $ID_Person_Staff ; JSONString];
-["templateRoles[0]tabs.textTabs[9]tabLabel"; "SalaryCurrent" ; JSONString];
-["templateRoles[0]tabs.textTabs[9]value"; $SalaryCurrent ; JSONString];
-["templateRoles[0]tabs.textTabs[10]tabLabel"; "SalaryWinter" ; JSONString];
-["templateRoles[0]tabs.textTabs[10]value"; $SalaryWinter ; JSONString];
-["templateRoles[0]tabs.textTabs[11]tabLabel"; "Fname" ; JSONString];
-["templateRoles[0]tabs.textTabs[11]value"; $Fname ; JSONString];
-["templateRoles[0]tabs.textTabs[12]tabLabel"; "Lname" ; JSONString];
-["templateRoles[0]tabs.textTabs[12]value"; $Lname ; JSONString];
-["templateRoles[0]tabs.textTabs[13]tabLabel"; "HomeAddress" ; JSONString];
-["templateRoles[0]tabs.textTabs[13]value"; $HomeAddress ; JSONString];
-["templateRoles[0]tabs.textTabs[14]tabLabel"; "City" ; JSONString];
-["templateRoles[0]tabs.textTabs[14]value"; $City ; JSONString];
-["templateRoles[0]tabs.textTabs[15]tabLabel"; "ID_PayrollADP" ; JSONString];
-["templateRoles[0]tabs.textTabs[15]value"; $ID_PayrollADP ; JSONString];
-["templateRoles[0]tabs.textTabs[16]tabLabel"; "Additional Amount" ; JSONString];
-["templateRoles[0]tabs.textTabs[16]value"; $AdditionalAmount ; JSONString];
-["templateRoles[0]tabs.textTabs[17]tabLabel"; "Allowances" ; JSONString];
-["templateRoles[0]tabs.textTabs[17]value"; $Allowances ; JSONString];
-["templateRoles[0]tabs.textTabs[18]tabLabel"; "SSN" ; JSONString];
-["templateRoles[0]tabs.textTabs[18]value"; $SSN ; JSONString];
-["templateRoles[0]tabs.textTabs[19]tabLabel"; "DateOfBirth" ; JSONString];
-["templateRoles[0]tabs.textTabs[19]value"; $DateOfBirth ; JSONString];
-["templateRoles[0]tabs.textTabs[20]tabLabel"; "Zip" ; JSONString];
-["templateRoles[0]tabs.textTabs[20]value"; $Zip ; JSONString];
-["status"; "sent" ; JSONString])
+...
+["status"; "sent" ; JSONString]
+)
 
 Set Variable [$url ; Value: {YOUR_DOCUSIGN_ENDPOINT}/v2.1/accounts/{ACCOUNTID}/envelopes ]
 Insert from URL [ Select ; With dialog: Off ; DocusignResult; $url; cURL options: "-X POST -H \"Authorization: Bearer " & $token & "\" -H \"Content-Type: application/json\"" & "-d @$post_data" ]

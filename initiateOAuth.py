@@ -13,7 +13,9 @@ import requests
 import json
 import os
 
-browser = webdriver.Firefox()
+# Get Authorization Code First - input the following in a browser
+# Sample Response: 
+# http://example.com/callback/?code=YOUR_AUTH_CODEbrowser = webdriver.Firefox()
 browser.get('https://account-d.docusign.com/oauth/auth?response_type=code&scope=signature&client_id=7c2b8d7e-xxxx-xxxx-xxxx-cda8a50dd73f&state=a39fh23hnf23&redirect_uri=http://example.com/callback/')
 print("You have 15 seconds to authenticate...")
 def countdown(t):
@@ -39,7 +41,7 @@ end = rlength - 22
 authcode = redirect[start:end]
 # print(redirect[start:end])
 
-headers = {'Authorization': 'Basic [BASE64_COMBINATION_OF_INTEGRATION_AND_SECRET_KEYS]}
+headers = {'Authorization': 'Basic {BASE64_COMBINATION_OF_INTEGRATION_AND_SECRET_KEYS}}
 payload = {'grant_type':'authorization_code', 'code': authcode }
 r = requests.post('https://account.docusign.com/oauth/token', data=payload, headers=headers)
 
@@ -59,6 +61,7 @@ print(j["access_token"])
 print("\n\nRefresh Token:")
 refreshToken = j["refresh_token"]
 
+# Run after obtaining Access and Refresh Token
 headers = {'Authorization': 'Basic [BASE64_COMBINATION_OF_INTEGRATION_AND_SECRET_KEYS]}
 payload = {'grant_type':'refresh_token', 'refresh_token': refreshToken }
 r = requests.post('https://account.docusign.com/oauth/token', data=payload, headers=headers)
