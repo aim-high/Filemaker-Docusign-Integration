@@ -1,14 +1,30 @@
 # Purpose: Uses refresh token to request access token and stores new token in access_token.txt
 # Dependencies: Must have valid refresh token to request new access token.
 # Created: 10-25-2019 by Erica Ching (eching@aimhigh.org)
-# Modified: 01-14-2020 by Erica
+# Modified: 02-03-2020 by Erica
 
 #!/Library/Frameworks/Python.framework/Versions/3.8/bin/python3
 import requests
 import json
 import datetime
 
-refreshToken = "{REFRESH_TOKEN}"
+def dayOfMonth(num):
+	day = int(datetime.datetime.now().strftime("%d"))	# must convert to int otherwise < 10 will look like '0#'
+	if (day == num):
+		return True
+	else:
+		return False
+
+firstDay = dayOfMonth(1) # First day of month
+if (firstDay):
+	with open("refresh_token.txt") as f:
+		first_line = f.readline().strip()
+	refreshToken = first_line
+	print("Renewing refresh token for new month")
+else:
+	refreshToken = "{REFRESH_TOKEN}"
+	print("Using this month's refresh token.")
+
 
 # GET HTTP request using refresh token
 headers = {'Authorization': 'Basic {BASE64_COMBINATION_OF_INTEGRATION_AND_SECRET_KEYS}'}
