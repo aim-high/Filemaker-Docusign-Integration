@@ -10,7 +10,7 @@
 Set Error Capture [On]
 Allow User Abort [Off]
 
-# Find records matching: Year = 2020, CheckoutStatus = Hired
+# Find records matching: Year = 2020, Omit: Status = completed
 Perform Find [Restore]
 If [ Get ( FoundCount ) = 0 ]
 	Show Custom Dialog ["Find Records" ; "No records were found."]

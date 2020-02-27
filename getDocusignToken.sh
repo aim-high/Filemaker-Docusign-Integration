@@ -1,5 +1,6 @@
 # Purpose: Checks that $PATH contains folder that contains geckodriver executeable. 
-# 	If geckodriver exec in /Applications and $PATH points to /Applications, calls initiateOAuth.py.  
+# If geckodriver exec in /Applications and $PATH points to /Applications, calls \
+# initiateOAuth.py.  
 # Dependencies: Assumes /Applications contains geckodriver exec. 
 # Created by: Erica Ching (eching@aimhigh.org) on 10-18-2019
 
@@ -16,7 +17,8 @@ else
 	if test $? -eq 0; then
 		echo "${GREEN}Success!${NC}"
 	else
-		echo "${RED}Issue with changing \$PATH variable to include folder where geckodriver executeable lives.${NC}"
+		echo "${RED}Issue with changing \$PATH variable to include folder where \
+		geckodriver executeable lives.${NC}"
 		fail=$(( fail + 1 ))
 	fi
 fi
@@ -62,7 +64,9 @@ else
 fi
 
 if [[ $fail -gt 0 ]]; then
-	echo -e "${RED}Did not pass all tests. Please visit 'https://github.com/aim-high/Filemaker-Docusign-Integration' for set up instructions...exiting script${NC}"
+	echo -e "${RED}Did not pass all tests. Please visit \
+	'https://github.com/aim-high/Filemaker-Docusign-Integration' for set up instructions\
+	...exiting script${NC}"
 	exit 1
 fi
 

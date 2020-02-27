@@ -11,7 +11,7 @@
 * Authorization Code Grant
 
 ### Requirements
-* Filemaker Pro Advanced 17
+* Filemaker Pro Advanced 17 or higher
 * [python3](https://www.python.org/downloads/)
 * [selenium](https://pypi.org/project/selenium/), [requests](https://pypi.org/project/requests/) modules
 * [Mozilla's geckodriver](https://github.com/mozilla/geckodriver)
