@@ -9,24 +9,9 @@ import requests
 import json
 import datetime
 
-def dayOfMonth(num):
-	# must convert to int otherwise < 10 will look like '0#'
-	day = int(datetime.datetime.now().strftime("%d"))
-	if (day == num):
-		return True
-	else:
-		return False
-
-firstDay = dayOfMonth(1) # First day of month
-if (firstDay):
-	with open("refresh_token.txt") as f:
-		first_line = f.readline().strip()
-	refreshToken = first_line
-	print("Renewing refresh token for new month")
-else:
-	refreshToken = "{REFRESH_TOKEN}"
-	print("Using this month's refresh token.")
-
+with open("refresh_token.txt") as f:
+	first_line = f.readline().strip()
+refreshToken = first_line
 
 # GET HTTP request using refresh token
 headers = {'Authorization': 'Basic {BASE64_COMBINATION_OF_INTEGRATION_AND_SECRET_KEYS}'}
@@ -54,11 +39,4 @@ writefile.close()
 with open("refresh_token.txt", mode="a") as file:
     file.write("\n\nScript run at %s.\n" % datetime.datetime.now())
 
-
-# Under construction: will refresh access token every 8 hours
-#expires = r["expires_in"]
-#now = datetime.datetime.now()
-#add_sec = now + datetime.timedelta(seconds=expires)
-
-#print('Current local date and time: ', now)
-#print('Will run again at: ', add_sec)
+print("Success!\nScript run at %s.\n" % datetime.datetime.now())
