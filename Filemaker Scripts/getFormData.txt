@@ -3,7 +3,7 @@
 # Dependencies:	Must have valid Docusign Access Token.
 # Context: 		N/A
 # History:		Created 2019-June-03 by Erica Ching (eching@aimhigh.org)
-#				Modified 2020-January-10 by Erica Ching
+#				Modified 2021-March-01 by Erica Ching
 # Notes:		None
 
 #-------------------------------------------------------------------------------------
@@ -17,41 +17,41 @@ End If
 Set Variable [ $token ; Value: DocusignToken ]
 
 Set Variable [ $get_data ; Value: DocusignResult ]
+# Production & Sandbox
 Set Variable [ $url ; Value: "{base_path}/v2.1/accounts/{accountId}/envelopes/{envelopeId}/form_data"]
 Insert from URL [ Select ; With dialog: Off ; DocusignResult ; $url ; cURL options: "-X GET" & " -H \"Authorization: Bearer " & $token & "\" -H \"Content-Type: application/json\"" & "-d @$get_data" ]
 
-# Get Status
+# Get Status and Date Signed tab values from Docusign envelope
 Set Field [ DocusignEnvelopeStatus ; JSONGetElement (DocusignResult ; "status ") ]
 If [ DocusignEnvelopeStatus = "completed" ]
 	Set Field [DocusignCompletedFlag ; 1 ]
 End If
+Set Field [ DocusignDateSigned; JSONGetElement (DocusignResult ; "Date Signed") ]
 
-# Create JSON object in order to parse by tab's name (instead of position)
-# ** Anytime a template is changed (add/remove tabs on Docusign), must update below accordingly. **
-If [ PositionType = "Lead Teacher" or PositionType = "Assistant Teacher" or PositionType = "Student Support Specialist" or PositionType = "Campus Coordinator" or PositionType = "Academic Coordinator"]
-	Set Field [ DocusignFullName ; JSONSetElement ( $$JSON ; 
+# Create JSON object from Docusign JSON to get elements by name instead of index position
+# Get number of json elements (indirectly via keys)
+Set Variable [ $num; Value: ValueCount (JSONListKeys (DocusignResult ; "formData")) ]
+Set Variable [ $count; Values: 0 ]
+Loop
+	Exit Loop If [ $count = $num ]
+	Set Variable [ $$JSON; Value: JSONSetElement ( $$JSON ; [ JSONGetElement ( DocusignResult ; "formData[" & $count & "]name") ; JSONGetElement ( DocusignResult ; "formData[" & $count & "]value" ) ; 1 ])
+	Set Variable [ $count; Value: $count + 1 ]
+End Loop
+Set Field [ DocusignResult; $$JSON ]
+
+# Example of a 3-element JSON
+//Set Field [ DocusignFullName ; JSONSetElement ( $$JSON ; 
 [ JSONGetElement ( DocusignResult ; "formData[0]name") ; JSONGetElement ( DocusignResult ; "formData[0]value" ) ; 1 ];
 [ JSONGetElement ( DocusignResult ; "formData[1]name") ; JSONGetElement ( DocusignResult ; "formData[1]value" ) ; 1 ];
-[ JSONGetElement ( DocusignResult ; "formData[2]name") ; JSONGetElement ( DocusignResult ; "formData[2]value" ) ; 1 ];
-...
-[ JSONGetElement ( DocusignResult ; "formData[60]name") ; JSONGetElement ( DocusignResult ; "formData[60]value" ) ; 1 ]
+[ JSONGetElement ( DocusignResult ; "formData[2]name") ; JSONGetElement ( DocusignResult ; "formData[2]value" ) ; 1 ]
 )
-Else If [PositionType = "Volunteer"]
-	...
-Else If [PositionType = "Intern"]
-	...
-Else If [PositionType = "Site Director"]
-	...
-End If
 
 # Parse JSON to get tab values
-Set Field [DocusignResult ; DocusignFullName]
 Set Field [DocusignFullName ; JSONGetElement (DocusignResult ; "Full Name")]
 Set Field [DocusignDiffNameFlag ; JSONGetElement (DocusignResult ; "Name differs")]
 ...
 ...
 ...
-
 
 Set Field [ DocusignResult ; ""]
 Exit Script [Text Result: $null] 
