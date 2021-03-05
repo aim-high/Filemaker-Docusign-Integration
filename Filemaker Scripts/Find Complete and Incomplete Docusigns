@@ -1,0 +1,24 @@
+# PURPOSE:		  Finds Staff Apps with completed/incomplete Docusign envelope.
+# PARAMETERS:	          None
+# Dependencies:	          Must have valid Docusign Access Token.
+# Context: 		  Docusign Layout
+# History:		  Created 2019-November-12 by Erica Ching (eching@aimhigh.org)
+#		          Modified 2021-Feb-19 by Erica Ching
+# Notes:		  Depending on which button user clicks, script will run specified find.
+
+#-------------------------------------------------------------------------------------
+
+Set Error Capture [ On ]
+Allow User Abort [ Off ]
+
+Set Variable [$currentYear; Value: YearCurrent_g]
+If [Get (ScriptParameter) = "Incomplete"]
+  Perform Find [Restore]
+Else If [Get (ScriptParameter) = "Completed"]
+  Perform Find [Restore]
+Else
+  Show Custom Dialog ["Search Failed"; "Script did not receive any specified parameters: Completed, Incomplete."]
+  Exit Script [Text Result: "No or incorrect script parameter received."]
+End If
+
+Exit Script [Text Result: $null]
