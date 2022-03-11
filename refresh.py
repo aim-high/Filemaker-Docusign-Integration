@@ -1,7 +1,7 @@
 # Purpose: Uses refresh token to request access token and stores new token in 
 # access_token.txt
 # Dependencies: Must have valid refresh token to request new access token.
-# Created: 10-25-2019 by Erica Ching (eching@aimhigh.org)
+# Created: 10-25-2019 by Erica
 # Modified: 02-03-2020 by Erica
 
 #!/Library/Frameworks/Python.framework/Versions/3.8/bin/python3
