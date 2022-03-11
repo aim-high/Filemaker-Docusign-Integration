@@ -2,7 +2,7 @@
 # If geckodriver exec in /Applications and $PATH points to /Applications, calls \
 # initiateOAuth.py.  
 # Dependencies: Assumes /Applications contains geckodriver exec. 
-# Created by: Erica Ching (eching@aimhigh.org) on 10-18-2019
+# Created by: Erica on 10-18-2019
 
 #!/bin/bash
 NC='\033[0m'
