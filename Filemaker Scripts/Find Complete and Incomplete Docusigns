@@ -2,8 +2,8 @@
 # PARAMETERS:	          None
 # Dependencies:	          Must have valid Docusign Access Token.
 # Context: 		  Docusign Layout
-# History:		  Created 2019-November-12 by Erica Ching (eching@aimhigh.org)
-#		          Modified 2021-Feb-19 by Erica Ching
+# History:		  Created 2019-November-12 by Erica
+#		          Modified 2021-Feb-19 by Erica
 # Notes:		  Depending on which button user clicks, script will run specified find.
 
 #-------------------------------------------------------------------------------------
