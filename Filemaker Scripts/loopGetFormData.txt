@@ -2,7 +2,7 @@
 # PARAMETERS:	None
 # Dependencies:	Must have valid envelopeID and Docusign Access Token.
 # Context: 		N/A
-# History:		Created 2019-June-03 by Erica Ching (eching@aimhigh.org)
+# History:		Created 2019-June-03 by Erica
 # Notes:		None
 
 #-------------------------------------------------------------------------------------
