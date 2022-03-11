@@ -2,7 +2,7 @@
 # PARAMETERS:	None
 # Dependencies:	Must have valid Docusign Access Token and TemplateID.
 # Context: 		N/A
-# History:		Created 2019-October-10 by Erica Ching (eching@aimhigh.org)
+# History:		Created 2019-October-10 by Erica
 # Notes:		None
 
 #-------------------------------------------------------------------------------------
